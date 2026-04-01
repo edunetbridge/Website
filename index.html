@@ -3,771 +3,1716 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkillBridge — Learning in Your Language</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Idarilearn — Sign Language Learning for Deaf Children in Africa</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 :root{
-  --ink:#0A1628;
-  --ink2:#1A2E4A;
-  --blue:#1B4FD8;
-  --blue-soft:#EEF3FF;
-  --amber:#F59E0B;
-  --amber-pale:#FFFBEB;
-  --green:#059669;
-  --cream:#FAFAF8;
+  --green:#1CB87A;
+  --green-dark:#0E9660;
+  --green-deep:#075C3B;
+  --green-pale:#E8F8F1;
+  --yellow:#FFB800;
+  --yellow-pale:#FFF8E7;
+  --dark:#0A1628;
+  --dark2:#132035;
+  --text:#1A1A2E;
+  --text2:#4A5568;
+  --text3:#718096;
   --white:#FFFFFF;
-  --g1:#F0F2F5;
-  --g2:#D1D9E6;
-  --g4:#6B7A99;
-  --g6:#2E3A52;
-  --r:18px;
-  --r2:28px;
-  --display:'Fraunces',serif;
-  --sans:'Plus Jakarta Sans',sans-serif;
+  --off:#F7FAFB;
+  --border:#E2E8F0;
+  --font:'Nunito',sans-serif;
+  --fontb:'Nunito Sans',sans-serif;
 }
-body{font-family:var(--sans);background:var(--cream);color:var(--ink);overflow-x:hidden;line-height:1.6}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--text);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+ul{list-style:none}
+button{cursor:pointer;font-family:var(--font);border:none;background:none}
 
-/* ─── NAV ─── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s}
-nav.scrolled{background:rgba(250,250,248,.95);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(0,0,0,.08)}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-mark{width:36px;height:36px;background:var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:center}
-.logo-mark svg{width:20px;height:20px}
-.logo-text{font-family:var(--display);font-size:20px;font-weight:700;color:var(--white)}
-.logo-text span{color:var(--amber)}
-nav.scrolled .logo-text{color:var(--ink)}
-.nav-r{display:flex;align-items:center;gap:8px}
-.nav-link{font-size:14px;font-weight:500;color:rgba(255,255,255,.7);text-decoration:none;padding:6px 12px;border-radius:8px;transition:color .2s,background .2s;display:none}
-nav.scrolled .nav-link{color:var(--g4)}
-.nav-link:hover{color:var(--white);background:rgba(255,255,255,.1)}
-nav.scrolled .nav-link:hover{color:var(--ink);background:var(--g1)}
-.nav-btn{background:var(--amber);color:var(--ink);font-family:var(--sans);font-size:14px;font-weight:700;padding:10px 20px;border-radius:100px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;display:none}
-.nav-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,158,11,.4)}
-.burger{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:5px}
-.burger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
-nav.scrolled .burger span{background:var(--ink)}
-.m-menu{display:none;position:fixed;inset:0;top:64px;background:var(--white);z-index:199;flex-direction:column;padding:24px;gap:4px}
-.m-menu.open{display:flex}
-.m-menu a{font-family:var(--display);font-size:32px;font-weight:700;color:var(--ink);text-decoration:none;padding:14px 0;border-bottom:1px solid var(--g1);transition:color .2s}
-.m-menu a:hover{color:var(--blue)}
-.m-menu .m-dl{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
-.m-menu .s-btn{display:flex;align-items:center;gap:10px;padding:14px 20px;border-radius:var(--r);font-weight:700;font-size:15px;text-decoration:none;flex:1;min-width:140px;justify-content:center}
-.s-btn-dark{background:var(--ink);color:var(--white)}
-.s-btn-amber{background:var(--amber);color:var(--ink)}
-@media(min-width:768px){
-  .nav-link{display:block}
-  .nav-btn{display:block}
-  .burger{display:none}
+/* ── NAV ── */
+.nav-top-bar{
+  background:var(--dark);
+  display:flex;align-items:center;justify-content:center;gap:0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  overflow:hidden;
+}
+.nav-mode-btn{
+  flex:1;max-width:200px;
+  padding:12px 20px;
+  color:rgba(255,255,255,0.5);
+  font-size:.82rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  text-align:center;
+  transition:all .2s;
+  position:relative;cursor:pointer;
+}
+.nav-mode-btn.active{color:var(--white);background:rgba(255,255,255,0.07)}
+.nav-mode-btn.active::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--green);
 }
 
-/* ─── HERO ─── */
-.hero{min-height:100svh;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden}
-.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.5}
-.hero-glow{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(27,79,216,.35) 0%,transparent 70%);top:-200px;left:50%;transform:translateX(-50%);pointer-events:none}
-.hero-glow2{position:absolute;width:600px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.12) 0%,transparent 70%);bottom:-100px;right:-100px;pointer-events:none}
-.hero-inner{position:relative;z-index:1;max-width:760px}
-.hero-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);font-size:13px;font-weight:500;padding:7px 16px 7px 10px;border-radius:100px;margin-bottom:32px;animation:up .7s ease both}
-.hero-chip-dot{width:24px;height:24px;background:rgba(245,158,11,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
-.hero-h1{font-family:var(--display);font-size:clamp(44px,9vw,88px);font-weight:900;line-height:1.0;color:var(--white);margin-bottom:28px;animation:up .7s .1s ease both;letter-spacing:-1px}
-.hero-h1 em{font-style:italic;color:var(--amber)}
-.hero-h1 .line2{display:block;color:rgba(255,255,255,.45);font-weight:300;font-style:italic}
-.hero-sub{font-size:clamp(16px,2.5vw,19px);color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 44px;line-height:1.75;animation:up .7s .2s ease both}
-.dl-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:up .7s .3s ease both}
-.dl-btn{display:flex;align-items:center;gap:12px;padding:14px 24px;border-radius:var(--r);text-decoration:none;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s}
-.dl-btn:hover{transform:translateY(-3px)}
-.dl-btn-w{background:var(--white);color:var(--ink);box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.dl-btn-w:hover{box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.dl-btn-a{background:var(--amber);color:var(--ink);box-shadow:0 4px 20px rgba(245,158,11,.3)}
-.dl-btn-a:hover{box-shadow:0 12px 40px rgba(245,158,11,.4)}
-.dl-btn-icon{font-size:22px;line-height:1}
-.dl-btn-copy{display:flex;flex-direction:column;text-align:left}
-.dl-btn-copy small{font-size:10px;font-weight:400;opacity:.6;font-family:var(--sans)}
+nav{
+  position:sticky;top:0;z-index:200;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  height:70px;
+  box-shadow:0 1px 12px rgba(0,0,0,0.06);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{
+  width:40px;height:40px;
+  background:var(--green);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-mark svg{width:22px;height:22px}
+.logo-name{
+  font-size:1.4rem;font-weight:900;
+  color:var(--dark);letter-spacing:-0.5px;
+}
+.logo-name span{color:var(--green)}
 
-.hero-proof{display:flex;align-items:center;justify-content:center;gap:32px;margin-top:56px;flex-wrap:wrap;animation:up .7s .4s ease both}
-.proof-item{text-align:center}
-.proof-n{font-family:var(--display);font-size:clamp(24px,4vw,36px);font-weight:900;color:var(--amber);line-height:1}
-.proof-l{font-size:12px;color:rgba(255,255,255,.35);margin-top:4px;max-width:120px}
-.proof-div{width:1px;height:40px;background:rgba(255,255,255,.1)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{
+  font-size:.9rem;font-weight:600;
+  color:var(--text2);
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--green)}
+.nav-links .has-arrow::after{content:' ▾';font-size:.7rem}
 
-.mockup-wrap{position:relative;margin-top:64px;animation:up .7s .5s ease both}
-.mockup{width:230px;margin:0 auto;position:relative}
-.m-frame{background:#111827;border-radius:40px;border:5px solid #1F2937;padding:16px 12px;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05);position:relative;overflow:hidden}
-.m-notch{width:90px;height:22px;background:#0A0F1A;border-radius:0 0 14px 14px;margin:0 auto 12px}
-.m-screen{display:flex;flex-direction:column;gap:10px}
-.m-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px}
-.m-row-icon{font-size:20px;min-width:30px;text-align:center}
-.m-row-body{flex:1}
-.m-row-title{font-size:10px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:2px}
-.m-row-sub{font-size:9px;color:rgba(255,255,255,.35)}
-.m-bar{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:6px;overflow:hidden}
-.m-bar-fill{height:100%;width:70%;background:var(--amber);border-radius:2px}
-.m-cam{background:rgba(27,79,216,.15);border:1px solid rgba(27,79,216,.3);border-radius:12px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:8px}
-.m-cam-big{font-size:36px}
-.m-cam-label{font-size:9px;color:rgba(255,255,255,.5);text-align:center}
-.m-score{background:rgba(5,150,105,.2);border:1px solid rgba(5,150,105,.4);border-radius:100px;padding:5px 14px;font-size:10px;font-weight:700;color:#34D399}
-.m-badge{position:absolute;top:16px;right:-16px;background:var(--amber);color:var(--ink);font-size:10px;font-weight:800;padding:6px 12px;border-radius:100px;box-shadow:0 4px 16px rgba(245,158,11,.4);white-space:nowrap}
+.nav-actions{display:flex;align-items:center;gap:.75rem}
+.btn-nav-login{
+  padding:.55rem 1.2rem;
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  font-size:.875rem;font-weight:700;
+  color:var(--text);
+  transition:all .2s;
+}
+.btn-nav-login:hover{border-color:var(--green);color:var(--green)}
+.btn-nav-cta{
+  padding:.55rem 1.4rem;
+  background:var(--green);
+  border-radius:8px;
+  font-size:.875rem;font-weight:800;
+  color:var(--white);
+  transition:all .2s;
+}
+.btn-nav-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
 
-@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-
-/* ─── SECTION BASE ─── */
-.sec{padding:88px 24px}
-.wrap{max-width:1100px;margin:0 auto}
-.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
-.kicker::before{content:'';width:20px;height:2px;background:var(--blue);border-radius:2px}
-.sec-h{font-family:var(--display);font-size:clamp(30px,5vw,52px);font-weight:900;color:var(--ink);line-height:1.08;margin-bottom:16px;letter-spacing:-.5px}
-.sec-h em{font-style:italic;color:var(--blue)}
-.sec-p{font-size:17px;color:var(--g4);line-height:1.75;max-width:560px}
-
-/* ─── PROBLEM BAND ─── */
-.problem{background:var(--ink2);padding:56px 24px}
-.problem-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(255,255,255,.07);border-radius:var(--r2);overflow:hidden}
-.stat-box{background:var(--ink2);padding:36px 28px}
-.stat-box:first-child{border-radius:var(--r2) 0 0 var(--r2)}
-.stat-box:last-child{border-radius:0 var(--r2) var(--r2) 0}
-.stat-n{font-family:var(--display);font-size:clamp(32px,5vw,52px);font-weight:900;color:var(--amber);margin-bottom:8px}
-.stat-l{font-size:14px;color:rgba(255,255,255,.45);line-height:1.5}
-
-/* ─── WHY ─── */
-.why{background:var(--white)}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;background:var(--g1);border-radius:var(--r2);overflow:hidden;margin-top:56px}
-.why-card{background:var(--white);padding:40px;transition:background .25s}
-.why-card:hover{background:#F7F9FF}
-.why-num{font-family:var(--display);font-size:60px;font-weight:900;color:var(--g1);line-height:1;margin-bottom:20px}
-.why-card h3{font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:10px}
-.why-card p{font-size:15px;color:var(--g4);line-height:1.75}
-
-/* ─── HOW ─── */
-.how{background:var(--cream)}
-.how-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:56px}
-.how-step{position:relative}
-.how-step-n{width:44px;height:44px;border-radius:12px;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:20px;font-weight:900;margin-bottom:20px}
-.how-step h3{font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:10px}
-.how-step p{font-size:14px;color:var(--g4);line-height:1.75}
-.how-step-tag{display:inline-block;margin-top:14px;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:700;padding:5px 12px;border-radius:100px}
-.how-connector{display:none}
-@media(min-width:768px){
-  .how-steps{gap:0}
-  .how-step{padding:32px}
-  .how-step:not(:last-child)::after{content:'→';position:absolute;right:-16px;top:44px;font-size:24px;color:var(--g2);font-weight:700;z-index:1}
+/* ── HERO ── */
+.hero{
+  background:var(--dark);
+  padding:5rem 5% 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:flex-end;
+  min-height:88vh;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;top:-40%;right:-10%;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(28,184,122,.18) 0%,transparent 70%);
+  pointer-events:none;
 }
 
-/* ─── FEATURES ─── */
-.features{background:var(--ink);padding:88px 24px}
-.features .kicker{color:var(--amber)}
-.features .kicker::before{background:var(--amber)}
-.features .sec-h{color:var(--white)}
-.features .sec-p{color:rgba(255,255,255,.45)}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:56px}
-.feat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--r2);padding:32px;transition:background .25s,transform .25s,border-color .25s}
-.feat:hover{background:rgba(255,255,255,.08);transform:translateY(-4px);border-color:rgba(245,158,11,.3)}
-.feat-icon{width:52px;height:52px;border-radius:14px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px}
-.feat h3{font-family:var(--display);font-size:19px;font-weight:700;color:var(--white);margin-bottom:10px}
-.feat p{font-size:14px;color:rgba(255,255,255,.45);line-height:1.75}
+.hero-left{padding-bottom:5rem;position:relative;z-index:2}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(28,184,122,.12);
+  border:1px solid rgba(28,184,122,.25);
+  color:var(--green);
+  font-size:.75rem;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.4rem .9rem;border-radius:50px;
+  margin-bottom:1.5rem;
+}
+.hero-eyebrow-dot{
+  width:6px;height:6px;background:var(--green);border-radius:50%;
+  animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* ─── CONTENT ─── */
-.content-sec{background:var(--white)}
-.content-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:56px}
-.subjects{display:flex;flex-direction:column;gap:10px}
-.subj{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:var(--r);border:1.5px solid var(--g1);cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
-.subj:hover{border-color:var(--blue);background:var(--blue-soft);transform:translateX(4px)}
-.subj-icon{font-size:28px;min-width:36px}
-.subj-info h4{font-family:var(--display);font-size:16px;font-weight:700;color:var(--ink)}
-.subj-info p{font-size:12px;color:var(--g4)}
-.subj-badge{margin-left:auto;font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;background:var(--blue-soft);color:var(--blue);white-space:nowrap}
-.content-copy h3{font-family:var(--display);font-size:clamp(26px,3.5vw,38px);font-weight:900;color:var(--ink);margin-bottom:18px;line-height:1.1;letter-spacing:-.3px}
-.content-copy p{font-size:15px;color:var(--g4);line-height:1.8;margin-bottom:20px}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.tag{background:var(--g1);color:var(--g6);font-size:13px;font-weight:600;padding:7px 16px;border-radius:100px;transition:background .2s,color .2s}
-.tag:hover{background:var(--blue);color:var(--white)}
-@media(max-width:768px){.content-split{grid-template-columns:1fr}.subjects{order:2}}
+.hero h1{
+  font-size:clamp(2.2rem,4.5vw,3.6rem);
+  font-weight:900;
+  color:var(--white);
+  line-height:1.1;
+  letter-spacing:-1.5px;
+  margin-bottom:1.25rem;
+}
+.hero h1 .highlight{
+  color:var(--green);
+  position:relative;
+}
 
-/* ─── COUNTRIES ─── */
-.countries{background:var(--cream)}
-.c-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:56px}
-.c-card{background:var(--white);border:1.5px solid var(--g1);border-radius:var(--r2);padding:28px 20px;text-align:center;transition:border-color .2s,transform .2s,box-shadow .2s}
-.c-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 16px 40px rgba(27,79,216,.1)}
-.c-flag{font-size:44px;margin-bottom:14px}
-.c-name{font-family:var(--display);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px}
-.c-lang{font-size:11px;color:var(--g4);margin-bottom:12px;line-height:1.4}
-.badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px}
-.live{background:rgba(5,150,105,.1);color:var(--green)}
-.soon{background:rgba(245,158,11,.1);color:#D97706}
-.planned{background:var(--g1);color:var(--g4)}
+.hero-sub{
+  font-family:var(--fontb);
+  font-size:1.05rem;
+  color:rgba(255,255,255,.65);
+  line-height:1.75;
+  max-width:480px;
+  margin-bottom:2rem;
+}
 
-/* ─── PARTNERS ─── */
-.partners{background:var(--white);padding:64px 24px}
-.partners-inner{max-width:1100px;margin:0 auto}
-.p-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:40px}
-.p-chip{background:var(--g1);border:1px solid var(--g2);border-radius:12px;padding:14px 24px;font-size:14px;font-weight:600;color:var(--g6);transition:all .2s;cursor:default}
-.p-chip:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.hero-how-link{
+  display:inline-flex;align-items:center;gap:10px;
+  color:rgba(255,255,255,.7);
+  font-size:.9rem;font-weight:600;
+  margin-bottom:2rem;
+  transition:color .2s;
+}
+.hero-how-link:hover{color:var(--white)}
+.play-icon-circle{
+  width:40px;height:40px;
+  background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.2);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
 
-/* ─── TESTIMONIALS ─── */
-.testi{background:var(--ink);padding:88px 24px}
-.testi .kicker{color:var(--amber)}
-.testi .kicker::before{background:var(--amber)}
-.testi .sec-h{color:var(--white)}
-.testi .sec-p{color:rgba(255,255,255,.4)}
-.t-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:56px}
-.t-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r2);padding:32px;transition:background .2s}
-.t-card:hover{background:rgba(255,255,255,.08)}
-.t-stars{color:var(--amber);font-size:14px;letter-spacing:3px;margin-bottom:20px}
-.t-q{font-family:var(--display);font-size:18px;font-weight:300;font-style:italic;color:rgba(255,255,255,.8);line-height:1.65;margin-bottom:28px}
-.t-auth{display:flex;align-items:center;gap:14px}
-.t-av{width:44px;height:44px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:15px;color:var(--ink);flex-shrink:0}
-.t-name{font-family:var(--display);font-size:15px;font-weight:700;color:var(--white)}
-.t-role{font-size:12px;color:rgba(255,255,255,.3)}
-.t-empty{background:rgba(255,255,255,.02);border:1.5px dashed rgba(255,255,255,.1);border-radius:var(--r2);padding:32px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;min-height:200px}
-.t-empty span{font-size:36px}
-.t-empty p{font-size:13px;color:rgba(255,255,255,.2);line-height:1.6}
+.hero-store-btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.store-btn{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  padding:.7rem 1.25rem;
+  color:var(--white);
+  transition:all .2s;
+}
+.store-btn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3)}
+.store-btn-icon{width:26px;height:26px;flex-shrink:0}
+.store-btn-text small{display:block;font-size:.65rem;opacity:.7;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.store-btn-text strong{display:block;font-size:.95rem;font-weight:800}
 
-/* ─── FAQ ─── */
-.faq{background:var(--cream);padding:88px 24px}
-.faq-wrap{max-width:720px;margin:56px auto 0}
-.faq-item{border-bottom:1px solid var(--g2);overflow:hidden}
-.faq-btn{width:100%;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;cursor:pointer;text-align:left}
-.faq-btn span{font-family:var(--display);font-size:18px;font-weight:700;color:var(--ink);line-height:1.3}
-.faq-ico{width:30px;height:30px;min-width:30px;border-radius:50%;border:1.5px solid var(--g2);display:flex;align-items:center;justify-content:center;transition:all .3s}
-.faq-ico svg{width:14px;height:14px;stroke:var(--g4);fill:none;stroke-width:2.5;transition:transform .3s}
-.faq-item.open .faq-ico{background:var(--ink);border-color:var(--ink)}
-.faq-item.open .faq-ico svg{stroke:var(--white);transform:rotate(45deg)}
-.faq-ans{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s}
-.faq-item.open .faq-ans{max-height:300px;padding-bottom:20px}
-.faq-ans p{font-size:15px;color:var(--g4);line-height:1.8}
+.hero-right{
+  position:relative;z-index:2;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+/* SVG Hero Illustration */
+.hero-illustration{
+  width:100%;max-width:520px;
+}
 
-/* ─── CTA ─── */
-.cta-sec{background:var(--amber);padding:88px 24px;text-align:center;position:relative;overflow:hidden}
-.cta-sec::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-.cta-inner{position:relative;z-index:1}
-.cta-h{font-family:var(--display);font-size:clamp(36px,6vw,64px);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:16px;letter-spacing:-.5px}
-.cta-sub{font-size:18px;color:rgba(10,22,40,.6);margin-bottom:44px;line-height:1.7}
-.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.cta-btn-dark{display:flex;align-items:center;gap:12px;padding:16px 28px;border-radius:var(--r);background:var(--ink);color:var(--white);text-decoration:none;font-weight:700;font-size:16px;transition:transform .2s,box-shadow .2s}
-.cta-btn-dark:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.3)}
-.cta-btn-w{display:flex;align-items:center;gap:12px;padding:16px 28px;border-radius:var(--r);background:var(--white);color:var(--ink);text-decoration:none;font-weight:700;font-size:16px;transition:transform .2s,box-shadow .2s}
-.cta-btn-w:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.15)}
+/* ── AWARDS ── */
+.awards-bar{
+  background:var(--white);
+  padding:2.5rem 5%;
+  border-bottom:1px solid var(--border);
+}
+.awards-bar h2{
+  text-align:center;
+  font-size:1.05rem;font-weight:800;
+  color:var(--text3);
+  letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:2rem;
+}
+.awards-grid{
+  display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;
+}
+.award-item{
+  display:flex;flex-direction:column;align-items:center;gap:.75rem;
+  text-align:center;max-width:160px;
+}
+.award-badge{
+  width:64px;height:64px;
+  background:var(--yellow-pale);
+  border:2px solid var(--yellow);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;
+}
+.award-label{
+  font-size:.78rem;font-weight:700;
+  color:var(--text2);line-height:1.4;
+}
 
-/* ─── FOOTER ─── */
-footer{background:#05101E;padding:48px 24px}
-.footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:center}
-.footer-brand .logo-text{color:var(--white);font-size:22px}
-.footer-brand p{font-size:13px;color:rgba(255,255,255,.25);margin-top:6px}
-.footer-links{display:flex;gap:24px;flex-wrap:wrap}
-.footer-links a{font-size:13px;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:var(--amber)}
-.footer-copy{width:100%;padding-top:32px;border-top:1px solid rgba(255,255,255,.06);font-size:12px;color:rgba(255,255,255,.2);text-align:center}
+/* ── NEXT GEN (dark feature) ── */
+.nextgen{
+  background:var(--dark2);
+  padding:5rem 5%;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.nextgen::before{
+  content:'';position:absolute;
+  left:50%;top:50%;transform:translate(-50%,-50%);
+  width:800px;height:400px;
+  background:radial-gradient(ellipse,rgba(28,184,122,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.nextgen-label{
+  font-size:.75rem;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:1rem;
+}
+.nextgen h2{
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:900;
+  color:var(--white);
+  letter-spacing:-1px;
+  margin-bottom:2.5rem;
+  position:relative;z-index:1;
+}
+.nextgen-store-btns{
+  display:flex;justify-content:center;gap:.75rem;
+  flex-wrap:wrap;
+  position:relative;z-index:1;
+}
+/* Glowing orbs */
+.nextgen-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.15;
+  pointer-events:none;
+}
+.orb1{width:300px;height:300px;background:var(--green);left:-5%;top:-30%}
+.orb2{width:200px;height:200px;background:#FFB800;right:5%;bottom:-20%}
 
-/* ─── SCROLL REVEAL ─── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.reveal.in{opacity:1;transform:none}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
+/* ── FEATURES TABS ── */
+.features-section{
+  background:var(--off);
+  padding:5rem 5%;
+}
+.features-section>h2{
+  text-align:center;
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:900;
+  color:var(--text);
+  letter-spacing:-0.5px;
+  margin-bottom:2rem;
+}
+.feat-tabs{
+  display:flex;justify-content:center;
+  gap:.5rem;flex-wrap:wrap;
+  margin-bottom:3rem;
+}
+.feat-tab{
+  padding:.6rem 1.25rem;
+  border-radius:50px;
+  border:1.5px solid var(--border);
+  background:var(--white);
+  font-size:.875rem;font-weight:700;
+  color:var(--text2);
+  cursor:pointer;
+  transition:all .2s;
+}
+.feat-tab:hover{border-color:var(--green);color:var(--green)}
+.feat-tab.active{
+  background:var(--green);
+  border-color:var(--green);
+  color:var(--white);
+}
+
+.feat-panel{display:none}
+.feat-panel.active{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+}
+
+.feat-content-tag{
+  font-size:.7rem;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:.75rem;
+}
+.feat-content h3{
+  font-size:clamp(1.5rem,2.5vw,2rem);
+  font-weight:900;letter-spacing:-.5px;
+  color:var(--text);
+  margin-bottom:1rem;
+  line-height:1.2;
+}
+.feat-quote{
+  background:var(--green-pale);
+  border-left:3px solid var(--green);
+  border-radius:0 10px 10px 0;
+  padding:1rem 1.25rem;
+  font-size:.9rem;
+  color:var(--text2);
+  line-height:1.7;
+  margin-bottom:1.5rem;
+  font-style:italic;
+}
+.feat-store-row{
+  display:flex;gap:.75rem;flex-wrap:wrap;
+  margin-bottom:.75rem;
+}
+.btn-store-sm{
+  display:flex;align-items:center;gap:8px;
+  background:var(--dark);
+  border-radius:10px;
+  padding:.6rem 1rem;
+  color:var(--white);
+  font-size:.8rem;font-weight:700;
+  transition:transform .15s;
+}
+.btn-store-sm:hover{transform:translateY(-2px)}
+.btn-store-sm svg{width:18px;height:18px;flex-shrink:0}
+.feat-free-link{
+  font-size:.85rem;font-weight:700;
+  color:var(--green);
+  text-decoration:underline;
+}
+
+.feat-visual{
+  position:relative;
+}
+.feat-phone-wrap{
+  background:var(--dark);
+  border-radius:32px;
+  padding:16px;
+  box-shadow:0 30px 80px rgba(0,0,0,.2);
+  max-width:260px;
+  margin:0 auto;
+}
+.feat-phone-screen{
+  background:var(--white);
+  border-radius:20px;
+  overflow:hidden;
+  aspect-ratio:9/18;
+}
+.feat-phone-header{
+  background:var(--green);
+  padding:14px 16px 10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.feat-phone-header span{
+  font-size:.75rem;font-weight:800;color:var(--white);
+}
+.feat-phone-body{padding:12px;display:flex;flex-direction:column;gap:8px}
+.feat-lesson-card{
+  background:var(--off);
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+.feat-lesson-thumb{
+  background:linear-gradient(135deg,var(--dark) 0%,var(--green-dark) 100%);
+  height:80px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.feat-lesson-thumb-tag{
+  position:absolute;top:6px;left:6px;
+  background:var(--green);
+  color:var(--white);
+  font-size:.55rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.05em;
+  padding:2px 6px;border-radius:4px;
+}
+.feat-play{
+  width:32px;height:32px;
+  background:rgba(255,255,255,.9);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.feat-lesson-info{padding:8px 10px}
+.feat-lesson-subj{font-size:.6rem;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.feat-lesson-title{font-size:.72rem;font-weight:700;color:var(--text)}
+.feat-sign-row{
+  background:var(--green-pale);
+  border-radius:12px;
+  padding:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.feat-cam{
+  width:44px;height:44px;
+  background:var(--dark);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.feat-cam svg{width:20px;height:20px}
+.feat-sign-info{flex:1}
+.feat-sign-label{font-size:.55rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:2px}
+.feat-sign-val{font-size:.68rem;font-weight:800;color:var(--green-deep)}
+.feat-score{
+  background:var(--green);
+  color:var(--white);
+  font-size:.65rem;font-weight:800;
+  padding:3px 7px;border-radius:20px;
+}
+.feat-subject-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:5px;
+}
+.feat-subj-pill{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:7px 4px;
+  text-align:center;
+}
+.feat-subj-pill span{display:block;font-size:11px;margin-bottom:1px}
+.feat-subj-pill p{font-size:.52rem;font-weight:700;color:var(--text2)}
+
+/* ── WHY IT WORKS ── */
+.why-section{
+  background:var(--white);
+  padding:5rem 5%;
+}
+.why-section>h2{
+  text-align:center;
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:900;
+  color:var(--text);
+  letter-spacing:-.5px;
+  margin-bottom:2rem;
+}
+.why-tabs{
+  display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem;
+}
+.why-tab{
+  padding:.6rem 1.5rem;
+  border-bottom:2.5px solid transparent;
+  font-size:.9rem;font-weight:700;
+  color:var(--text3);
+  cursor:pointer;transition:all .2s;
+}
+.why-tab:hover{color:var(--text)}
+.why-tab.active{color:var(--green);border-bottom-color:var(--green)}
+
+.why-panel{display:none}
+.why-panel.active{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:center;
+}
+.why-panel ul{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.why-panel li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:.95rem;color:var(--text2);line-height:1.6;
+}
+.check-circle{
+  width:22px;height:22px;
+  background:var(--green-pale);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.check-circle svg{width:12px;height:12px;color:var(--green)}
+.why-img-wrap{
+  border-radius:24px;overflow:hidden;
+  background:var(--green-pale);
+  min-height:320px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.why-img-inner{text-align:center;padding:2rem}
+.why-emoji{font-size:4rem;display:block;margin-bottom:1rem}
+.why-img-label{font-size:1.1rem;font-weight:900;color:var(--green-deep);margin-bottom:.3rem}
+.why-img-sub{font-size:.85rem;color:var(--text3)}
+
+/* ── CONTENT EXPLORE ── */
+.explore-section{
+  background:var(--off);
+  padding:5rem 5%;
+}
+.explore-section>h2{
+  text-align:center;
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:900;color:var(--text);
+  letter-spacing:-.5px;margin-bottom:1.5rem;
+}
+.explore-tabs{
+  display:flex;justify-content:center;gap:.5rem;margin-bottom:2.5rem;
+}
+.explore-tab{
+  padding:.5rem 1.25rem;
+  border-radius:50px;
+  border:1.5px solid var(--border);
+  background:var(--white);
+  font-size:.85rem;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:all .2s;
+}
+.explore-tab.active{background:var(--green);border-color:var(--green);color:var(--white)}
+
+.explore-cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.25rem;
+}
+.explore-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  transition:transform .2s,box-shadow .2s;
+}
+.explore-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.explore-card-thumb{
+  height:120px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;
+  position:relative;
+}
+.explore-card-thumb.green{background:var(--green-pale)}
+.explore-card-thumb.yellow{background:var(--yellow-pale)}
+.explore-card-thumb.blue{background:#EBF4FF}
+.explore-card-thumb.pink{background:#FFF0F5}
+.explore-card-info{padding:12px}
+.explore-card-subj{
+  font-size:.65rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.07em;
+  color:var(--green);margin-bottom:3px;
+}
+.explore-card-title{font-size:.82rem;font-weight:800;color:var(--text);line-height:1.35}
+.explore-card-level{
+  margin-top:6px;
+  font-size:.68rem;font-weight:700;
+  color:var(--text3);
+}
+
+/* ── STATS ── */
+.stats-section{
+  background:var(--dark);
+  padding:4rem 5%;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2rem;
+  text-align:center;
+}
+.stat-item-num{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:900;
+  color:var(--white);
+  line-height:1;
+  margin-bottom:.4rem;
+}
+.stat-item-num span{color:var(--green)}
+.stat-item-label{
+  font-size:.85rem;
+  color:rgba(255,255,255,.55);
+  line-height:1.5;
+  font-weight:600;
+}
+
+/* ── CTA BANNER ── */
+.cta-banner{
+  background:var(--green);
+  padding:4rem 5%;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:3rem;
+  align-items:center;
+}
+.cta-banner h2{
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:900;
+  color:var(--white);
+  letter-spacing:-.5px;
+  margin-bottom:.5rem;
+}
+.cta-banner p{
+  font-size:1rem;
+  color:rgba(255,255,255,.8);
+  line-height:1.6;
+}
+.cta-banner-actions{
+  display:flex;flex-direction:column;gap:.75rem;align-items:flex-end;
+}
+.btn-white-solid{
+  display:flex;align-items:center;gap:8px;
+  background:var(--white);
+  border-radius:10px;
+  padding:.75rem 1.5rem;
+  font-size:.9rem;font-weight:800;
+  color:var(--green-deep);
+  white-space:nowrap;
+  transition:transform .15s,box-shadow .2s;
+}
+.btn-white-solid:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.btn-whatsapp{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.15);
+  border:1.5px solid rgba(255,255,255,.4);
+  border-radius:10px;
+  padding:.75rem 1.5rem;
+  font-size:.9rem;font-weight:700;
+  color:var(--white);
+  white-space:nowrap;
+  transition:all .2s;
+}
+.btn-whatsapp:hover{background:rgba(255,255,255,.25)}
+
+/* ── FAQ ── */
+.faq-section{
+  background:var(--off);
+  padding:5rem 5%;
+  max-width:800px;margin:0 auto;
+}
+.faq-section h2{
+  text-align:center;
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:900;color:var(--text);
+  letter-spacing:-.5px;margin-bottom:2.5rem;
+}
+.faq-item{
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+}
+.faq-question{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 0;
+  font-size:1rem;font-weight:700;color:var(--text);
+  gap:1rem;
+}
+.faq-arrow{
+  width:24px;height:24px;
+  background:var(--green-pale);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:transform .25s;
+}
+.faq-arrow svg{width:12px;height:12px;color:var(--green)}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.faq-answer{
+  max-height:0;overflow:hidden;
+  transition:max-height .3s ease;
+  font-size:.92rem;color:var(--text2);line-height:1.75;
+}
+.faq-item.open .faq-answer{max-height:200px;padding-bottom:1.25rem}
+.faq-footer{
+  text-align:center;margin-top:2rem;
+  font-size:.9rem;color:var(--text3);font-weight:600;
+}
+.faq-footer a{color:var(--green);font-weight:700}
+
+/* ── IN THE NEWS ── */
+.news-section{
+  background:var(--white);
+  padding:4rem 5%;
+}
+.news-section h2{
+  text-align:center;
+  font-size:clamp(1.2rem,2vw,1.5rem);
+  font-weight:900;color:var(--text);
+  letter-spacing:-.3px;margin-bottom:2.5rem;
+}
+.news-logos{
+  display:flex;justify-content:center;align-items:center;
+  gap:2rem;flex-wrap:wrap;
+}
+.news-logo-box{
+  padding:.75rem 1.5rem;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  font-size:1rem;font-weight:900;
+  color:var(--text3);
+  letter-spacing:-.3px;
+  transition:all .2s;
+}
+.news-logo-box:hover{border-color:var(--green);color:var(--green)}
+
+/* ── COUNTRIES MARQUEE ── */
+.countries-section{
+  background:var(--off);
+  padding:3rem 0;
+  overflow:hidden;
+}
+.countries-section h2{
+  text-align:center;
+  font-size:clamp(1.2rem,2vw,1.5rem);
+  font-weight:900;color:var(--text);
+  letter-spacing:-.3px;margin-bottom:2rem;
+}
+.marquee-track{
+  display:flex;gap:2rem;
+  animation:marquee 20s linear infinite;
+  width:max-content;
+}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.country-chip{
+  display:flex;align-items:center;gap:8px;
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:50px;
+  padding:.5rem 1.25rem;
+  white-space:nowrap;
+  font-size:.875rem;font-weight:700;color:var(--text2);
+}
+.country-flag{font-size:1.2rem}
+
+/* ── SUPPORTERS ── */
+.supporters-section{
+  background:var(--white);
+  padding:4rem 5%;
+}
+.supporters-section h2{
+  text-align:center;
+  font-size:clamp(1.2rem,2vw,1.5rem);
+  font-weight:900;color:var(--text);
+  margin-bottom:2.5rem;
+}
+.supporters-grid{
+  display:flex;justify-content:center;align-items:center;
+  gap:2rem;flex-wrap:wrap;
+}
+.supporter-logo{
+  padding:.75rem 1.5rem;
+  background:var(--off);
+  border-radius:10px;
+  border:1px solid var(--border);
+  font-size:.85rem;font-weight:900;
+  color:var(--text3);
+  letter-spacing:-.2px;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--dark);
+  padding:4rem 5% 0;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.8fr 1fr 1fr 1fr;
+  gap:3rem;
+  padding-bottom:3rem;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.footer-brand-logo{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.footer-brand-logo .logo-name{color:var(--white)}
+.footer-brand p{
+  font-size:.85rem;color:rgba(255,255,255,.5);
+  line-height:1.75;max-width:260px;margin-bottom:1rem;
+}
+.footer-contact{
+  font-size:.82rem;color:rgba(255,255,255,.4);
+  line-height:1.8;
+}
+.footer-contact a{color:rgba(255,255,255,.5);transition:color .2s}
+.footer-contact a:hover{color:var(--green)}
+
+.footer-col h5{
+  font-size:.7rem;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);
+  margin-bottom:1.25rem;
+}
+.footer-col ul{display:flex;flex-direction:column;gap:.7rem}
+.footer-col a{
+  font-size:.875rem;color:rgba(255,255,255,.55);
+  transition:color .2s;font-weight:600;
+}
+.footer-col a:hover{color:var(--white)}
+
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 0;flex-wrap:wrap;gap:1rem;
+}
+.footer-bottom p{font-size:.8rem;color:rgba(255,255,255,.3)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-size:.8rem;color:rgba(255,255,255,.3);transition:color .2s;font-weight:600}
+.footer-bottom-links a:hover{color:rgba(255,255,255,.6)}
+
+/* ── POPUP ── */
+.popup-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.5);
+  display:flex;align-items:flex-end;justify-content:flex-end;
+  padding:2rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.popup-overlay.show{opacity:1;pointer-events:all}
+.popup-card{
+  background:var(--white);
+  border-radius:20px;
+  padding:2rem;
+  max-width:380px;width:100%;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  position:relative;
+  transform:translateY(20px);
+  transition:transform .3s;
+}
+.popup-overlay.show .popup-card{transform:translateY(0)}
+.popup-close{
+  position:absolute;top:12px;right:14px;
+  font-size:1.2rem;color:var(--text3);
+  background:none;border:none;cursor:pointer;
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  transition:background .2s;
+}
+.popup-close:hover{background:var(--off)}
+.popup-face{font-size:2.5rem;margin-bottom:1rem}
+.popup-card h3{
+  font-size:1.15rem;font-weight:900;color:var(--text);
+  letter-spacing:-.3px;margin-bottom:.5rem;
+}
+.popup-card p{
+  font-size:.85rem;color:var(--text3);line-height:1.6;margin-bottom:1.25rem;
+}
+.popup-input-row{
+  display:flex;gap:.5rem;
+}
+.popup-input{
+  flex:1;
+  padding:.7rem 1rem;
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  font-size:.875rem;font-family:var(--font);
+  color:var(--text);
+  outline:none;
+  transition:border-color .2s;
+}
+.popup-input:focus{border-color:var(--green)}
+.popup-submit{
+  background:var(--green);
+  color:var(--white);
+  border-radius:8px;
+  padding:.7rem 1.1rem;
+  font-size:.85rem;font-weight:800;
+  white-space:nowrap;
+  transition:background .2s;
+}
+.popup-submit:hover{background:var(--green-dark)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;padding-bottom:3rem}
+  .hero-right{display:none}
+  .stats-grid,.explore-cards{grid-template-columns:repeat(2,1fr)}
+  .feat-panel.active,.why-panel.active{grid-template-columns:1fr;gap:2rem}
+  .feat-visual,.why-img-wrap{max-width:320px;margin:0 auto}
+  .cta-banner{grid-template-columns:1fr}
+  .cta-banner-actions{align-items:flex-start}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .explore-cards{grid-template-columns:1fr 1fr}
+  footer{padding:3rem 5% 0}
+  .footer-grid{grid-template-columns:1fr}
+  .awards-grid{gap:1.5rem}
+}
 </style>
 </head>
 <body>
 
-<nav id="nav">
+<!-- NAV TOP BAR - Dual Mode -->
+<div class="nav-top-bar">
+  <button class="nav-mode-btn" onclick="setMode('schools')">
+    🏫 For Schools
+  </button>
+  <button class="nav-mode-btn active" onclick="setMode('learners')">
+    🎓 For Learners
+  </button>
+</div>
+
+<!-- STICKY NAV -->
+<nav>
   <a href="#" class="logo">
     <div class="logo-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 9l-3 3 3 3M17 9l3 3-3 3M14 5l-4 14"/>
+      </svg>
     </div>
-    <span class="logo-text">Skill<span>Bridge</span></span>
+    <span class="logo-name">Idari<span>learn</span></span>
   </a>
-  <div class="nav-r">
-    <a href="#why" class="nav-link">Why Us</a>
-    <a href="#how" class="nav-link">How It Works</a>
-    <a href="#features" class="nav-link">Features</a>
-    <a href="#faq" class="nav-link">FAQ</a>
-    <a href="#download" class="nav-btn">Download</a>
-    <button class="burger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+
+  <ul class="nav-links">
+    <li><a href="#" class="has-arrow">About</a></li>
+    <li><a href="#features" class="has-arrow">Features</a></li>
+    <li><a href="#why">Why it works</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <a href="#" class="btn-nav-login">Login</a>
+    <a href="#" class="btn-nav-cta">Download Free</a>
   </div>
 </nav>
 
-<div class="m-menu" id="mMenu">
-  <a href="#why" onclick="closeMenu()">Why Us</a>
-  <a href="#how" onclick="closeMenu()">How It Works</a>
-  <a href="#features" onclick="closeMenu()">Features</a>
-  <a href="#countries" onclick="closeMenu()">Countries</a>
-  <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <div class="m-dl">
-    <a href="#" class="s-btn s-btn-dark">🍎 App Store</a>
-    <a href="#" class="s-btn s-btn-amber">▶ Google Play</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      AI-Powered · Nigerian Sign Language · Free
+    </div>
+
+    <h1>
+      The <span class="highlight">Better Way</span><br>
+      for Deaf Children<br>
+      to Learn & Succeed
+    </h1>
+
+    <p class="hero-sub">
+      Join 500+ learners using Idarilearn to love learning, thrive in school, and build a brighter future — in Nigerian Sign Language.
+    </p>
+
+    <a href="#how" class="hero-how-link">
+      <div class="play-icon-circle">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      How it works
+    </a>
+
+    <div class="hero-store-btns">
+      <a href="#" class="store-btn">
+        <svg class="store-btn-icon" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="store-btn-text">
+          <small>Download on the</small>
+          <strong>App Store</strong>
+        </div>
+      </a>
+      <a href="#" class="store-btn">
+        <svg class="store-btn-icon" viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>
+        <div class="store-btn-text">
+          <small>Get it on</small>
+          <strong>Google Play</strong>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Illustration (SVG App Preview) -->
+  <div class="hero-right">
+    <div class="hero-illustration">
+      <svg viewBox="0 0 460 560" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <!-- Phone body -->
+        <rect x="60" y="20" width="280" height="520" rx="36" ry="36" fill="#1A2540" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+        <rect x="72" y="36" width="256" height="488" rx="24" ry="24" fill="#F7FAFB"/>
+        <!-- Status bar -->
+        <rect x="72" y="36" width="256" height="40" rx="24" ry="24" fill="#0E9660"/>
+        <rect x="72" y="56" width="256" height="20" fill="#0E9660"/>
+        <text x="92" y="62" font-family="Nunito" font-size="11" font-weight="800" fill="white">Idarilearn</text>
+        <text x="278" y="62" font-family="Nunito" font-size="9" font-weight="700" fill="rgba(255,255,255,0.7)" text-anchor="end">Level 3</text>
+        <!-- Lesson Card -->
+        <rect x="84" y="86" width="232" height="130" rx="14" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+        <rect x="84" y="86" width="232" height="78" rx="14" fill="url(#heroGrad)"/>
+        <rect x="84" y="136" width="232" height="28" fill="url(#heroGrad)"/>
+        <!-- Play button -->
+        <circle cx="200" cy="123" r="20" fill="rgba(255,255,255,0.9)"/>
+        <polygon points="195,116 195,130 211,123" fill="#0E9660"/>
+        <!-- NSL Tag -->
+        <rect x="92" y="93" width="40" height="15" rx="4" fill="#1CB87A"/>
+        <text x="112" y="104" font-family="Nunito" font-size="7" font-weight="800" fill="white" text-anchor="middle">NSL Video</text>
+        <!-- Lesson info -->
+        <text x="92" y="178" font-family="Nunito" font-size="8" font-weight="800" fill="#1CB87A">LITERACY · GRADE 2</text>
+        <text x="92" y="194" font-family="Nunito" font-size="10" font-weight="800" fill="#1A1A2E">Vowels in Nigerian Sign Language</text>
+        <!-- Progress bar -->
+        <rect x="92" y="202" width="212" height="4" rx="2" fill="#E2E8F0"/>
+        <rect x="92" y="202" width="140" height="4" rx="2" fill="#1CB87A"/>
+
+        <!-- Sign Recognition Box -->
+        <rect x="84" y="228" width="232" height="68" rx="14" fill="#E8F8F1" stroke="#1CB87A" stroke-width="1"/>
+        <rect x="92" y="237" width="48" height="48" rx="10" fill="#0A1628"/>
+        <!-- Camera icon -->
+        <rect x="103" y="247" width="26" height="20" rx="3" fill="none" stroke="white" stroke-width="1.5"/>
+        <circle cx="116" cy="257" r="5" fill="none" stroke="white" stroke-width="1.5"/>
+        <text x="148" y="253" font-family="Nunito" font-size="7" font-weight="800" fill="#718096">SIGN FEEDBACK</text>
+        <text x="148" y="266" font-family="Nunito" font-size="9" font-weight="800" fill="#075C3B">✓ Letter "A" recognised!</text>
+        <!-- Score pill -->
+        <rect x="268" y="247" width="40" height="22" rx="11" fill="#1CB87A"/>
+        <text x="288" y="262" font-family="Nunito" font-size="9" font-weight="900" fill="white" text-anchor="middle">96%</text>
+
+        <!-- Subject pills -->
+        <rect x="84" y="308" width="70" height="52" rx="10" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="119" y="330" font-family="Nunito" font-size="18" text-anchor="middle">📖</text>
+        <text x="119" y="348" font-family="Nunito" font-size="8" font-weight="700" fill="#4A5568" text-anchor="middle">Literacy</text>
+
+        <rect x="165" y="308" width="70" height="52" rx="10" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="200" y="330" font-family="Nunito" font-size="18" text-anchor="middle">🔢</text>
+        <text x="200" y="348" font-family="Nunito" font-size="8" font-weight="700" fill="#4A5568" text-anchor="middle">Numeracy</text>
+
+        <rect x="246" y="308" width="70" height="52" rx="10" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="281" y="330" font-family="Nunito" font-size="18" text-anchor="middle">🌍</text>
+        <text x="281" y="348" font-family="Nunito" font-size="8" font-weight="700" fill="#4A5568" text-anchor="middle">Science</text>
+
+        <!-- Progress / Stats row -->
+        <rect x="84" y="374" width="232" height="64" rx="14" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="92" y="392" font-family="Nunito" font-size="8" font-weight="800" fill="#718096">THIS WEEK'S PROGRESS</text>
+        <!-- Mini bars -->
+        <rect x="92" y="400" width="28" height="24" rx="3" fill="#E8F8F1"/>
+        <rect x="92" y="414" width="28" height="10" rx="3" fill="#1CB87A"/>
+        <rect x="126" y="400" width="28" height="24" rx="3" fill="#E8F8F1"/>
+        <rect x="126" y="406" width="28" height="18" rx="3" fill="#1CB87A"/>
+        <rect x="160" y="400" width="28" height="24" rx="3" fill="#E8F8F1"/>
+        <rect x="160" y="400" width="28" height="24" rx="3" fill="#1CB87A"/>
+        <rect x="194" y="400" width="28" height="24" rx="3" fill="#E8F8F1"/>
+        <rect x="194" y="408" width="28" height="16" rx="3" fill="#1CB87A"/>
+        <rect x="228" y="400" width="28" height="24" rx="3" fill="#E8F8F1"/>
+        <rect x="228" y="412" width="28" height="12" rx="3" fill="#FFB800"/>
+        <text x="270" y="408" font-family="Nunito" font-size="18" font-weight="900" fill="#1CB87A">🔥</text>
+        <text x="270" y="422" font-family="Nunito" font-size="8" font-weight="800" fill="#1CB87A">5 streak</text>
+
+        <!-- Home indicator -->
+        <rect x="165" y="506" width="70" height="4" rx="2" fill="#CBD5E0"/>
+
+        <!-- Floating badge -->
+        <rect x="320" y="80" width="120" height="54" rx="14" fill="white" stroke="#E2E8F0" stroke-width="1" filter="url(#shadow)"/>
+        <text x="330" y="100" font-family="Nunito" font-size="10" font-weight="800" fill="#1CB87A">🎉 Level Up!</text>
+        <text x="330" y="116" font-family="Nunito" font-size="9" fill="#718096">Sign Accuracy: 96%</text>
+
+        <!-- Floating badge 2 -->
+        <rect x="0" y="220" width="90" height="48" rx="12" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="10" y="240" font-family="Nunito" font-size="9" font-weight="800" fill="#1A1A2E">500+</text>
+        <text x="10" y="255" font-family="Nunito" font-size="8" fill="#718096">Learners</text>
+
+        <!-- Floating badge 3 -->
+        <rect x="340" y="280" width="110" height="54" rx="12" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+        <text x="352" y="300" font-family="Nunito" font-size="9" font-weight="800" fill="#1A1A2E">5 Schools</text>
+        <text x="352" y="316" font-family="Nunito" font-size="8" fill="#718096">Ready to pilot</text>
+        <text x="352" y="328" font-family="Nunito" font-size="8" fill="#718096">Idarilearn 🏫</text>
+
+        <!-- Gradients & Filters -->
+        <defs>
+          <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0A1628"/>
+            <stop offset="100%" stop-color="#0E9660"/>
+          </linearGradient>
+          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.12)"/>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS BAR -->
+<div class="awards-bar">
+  <h2>Recognition & Awards</h2>
+  <div class="awards-grid">
+    <div class="award-item">
+      <div class="award-badge">🏆</div>
+      <div class="award-label">UNICEF Venture Fund Supported</div>
+    </div>
+    <div class="award-item">
+      <div class="award-badge">🌍</div>
+      <div class="award-label">Top EdTech Innovation in Africa</div>
+    </div>
+    <div class="award-item">
+      <div class="award-badge">🤟</div>
+      <div class="award-label">Deaf Community Champion 2025</div>
+    </div>
+    <div class="award-item">
+      <div class="award-badge">💡</div>
+      <div class="award-label">Open Source Education Award</div>
+    </div>
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-noise"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-inner">
-    <div class="hero-chip">
-      <div class="hero-chip-dot">🇳🇬</div>
-      Built for Nigeria's deaf children
-    </div>
-    <h1 class="hero-h1">
-      Every child<br>
-      deserves to <em>learn.</em>
-      <span class="line2">We built the tool to make it real.</span>
-    </h1>
-    <p class="hero-sub">SkillBridge is the first AI-powered learning app for deaf children in Africa — delivering curriculum-aligned education entirely in Nigerian Sign Language, offline, on any Android phone.</p>
-    <div class="dl-btns" id="download">
-      <a href="#" class="dl-btn dl-btn-w">
-        <span class="dl-btn-icon">🍎</span>
-        <div class="dl-btn-copy"><small>Download on the</small>App Store</div>
-      </a>
-      <a href="#" class="dl-btn dl-btn-a">
-        <span class="dl-btn-icon">▶</span>
-        <div class="dl-btn-copy"><small>Get it on</small>Google Play</div>
-      </a>
-    </div>
-    <div class="hero-proof">
-      <div class="proof-item">
-        <div class="proof-n">4M+</div>
-        <div class="proof-l">Deaf Nigerians locked out of edtech</div>
+<!-- NEXT GEN DARK SECTION -->
+<section class="nextgen">
+  <div class="nextgen-orb orb1"></div>
+  <div class="nextgen-orb orb2"></div>
+  <div class="nextgen-label">Powered by Frontier AI</div>
+  <h2>Africa's first AI-powered sign language<br>learning platform for deaf children</h2>
+  <div class="nextgen-store-btns">
+    <a href="#" class="store-btn">
+      <svg class="store-btn-icon" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="store-btn-text"><small>Download on the</small><strong>App Store</strong></div>
+    </a>
+    <a href="#" class="store-btn">
+      <svg class="store-btn-icon" viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>
+      <div class="store-btn-text"><small>Get it on</small><strong>Google Play</strong></div>
+    </a>
+  </div>
+</section>
+
+<!-- FEATURES TABS (Everything you need) -->
+<section class="features-section" id="features">
+  <h2>Everything you need to succeed</h2>
+  <div class="feat-tabs">
+    <button class="feat-tab active" onclick="switchFeat('sign-lessons',this)">NSL Sign Lessons</button>
+    <button class="feat-tab" onclick="switchFeat('sign-recognition',this)">Sign Recognition</button>
+    <button class="feat-tab" onclick="switchFeat('adaptive',this)">Adaptive Learning</button>
+    <button class="feat-tab" onclick="switchFeat('progress',this)">Progress Reports</button>
+    <button class="feat-tab" onclick="switchFeat('offline',this)">Works Offline</button>
+    <button class="feat-tab" onclick="switchFeat('parents',this)">Parent Mode</button>
+  </div>
+
+  <!-- Panel 1 -->
+  <div class="feat-panel active" id="feat-sign-lessons">
+    <div class="feat-content">
+      <div class="feat-content-tag">NSL Video Instruction</div>
+      <h3>Access complete NSL-based lessons, anytime.</h3>
+      <div class="feat-quote">
+        "As a teacher, having ready-made NSL video lessons has saved me countless hours. My deaf students now learn at home too — something that was impossible before."<br><br>
+        <strong>— Mrs. Adeyemi, Teacher at School for the Deaf, Lagos</strong>
       </div>
-      <div class="proof-div"></div>
-      <div class="proof-item">
-        <div class="proof-n">500K+</div>
-        <div class="proof-l">School-age deaf children in Nigeria</div>
+      <div class="feat-store-row">
+        <a href="#" class="btn-store-sm">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="#" class="btn-store-sm">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>
+          Google Play
+        </a>
       </div>
-      <div class="proof-div"></div>
-      <div class="proof-item">
-        <div class="proof-n">0</div>
-        <div class="proof-l">Apps built for them — until now</div>
-      </div>
+      <a href="#" class="feat-free-link">Get it free →</a>
     </div>
-    <div class="mockup-wrap">
-      <div class="mockup">
-        <div class="m-badge">AI-Powered ✦</div>
-        <div class="m-frame">
-          <div class="m-notch"></div>
-          <div class="m-screen">
-            <div class="m-row">
-              <div class="m-row-icon">📚</div>
-              <div class="m-row-body">
-                <div class="m-row-title">Today's Lesson — NSL Literacy</div>
-                <div class="m-row-sub">Module 2 · The Alphabet A–F</div>
-                <div class="m-bar"><div class="m-bar-fill"></div></div>
+    <div class="feat-visual">
+      <div class="feat-phone-wrap">
+        <div class="feat-phone-screen">
+          <div class="feat-phone-header">
+            <span>Idarilearn</span>
+            <span>Level 3</span>
+          </div>
+          <div class="feat-phone-body">
+            <div class="feat-lesson-card">
+              <div class="feat-lesson-thumb">
+                <span class="feat-lesson-thumb-tag">NSL Video</span>
+                <div class="feat-play">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="#0E9660"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+              <div class="feat-lesson-info">
+                <div class="feat-lesson-subj">Literacy · Grade 2</div>
+                <div class="feat-lesson-title">Vowels in Nigerian Sign Language</div>
               </div>
             </div>
-            <div class="m-cam">
-              <div class="m-cam-big">🤟</div>
-              <div class="m-cam-label">AI is watching your sign...</div>
-              <div class="m-score">✓ Correct! 94% confidence</div>
-            </div>
-            <div class="m-row">
-              <div class="m-row-icon">👩‍🏫</div>
-              <div class="m-row-body">
-                <div class="m-row-title">Teacher Assigned</div>
-                <div class="m-row-sub">Numbers 1–10 · Due today</div>
+            <div class="feat-sign-row">
+              <div class="feat-cam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><polygon points="16 3 8 3 7 7 17 7"/></svg>
               </div>
+              <div class="feat-sign-info">
+                <div class="feat-sign-label">Sign Feedback</div>
+                <div class="feat-sign-val">✓ Letter "A" recognised!</div>
+              </div>
+              <div class="feat-score">96%</div>
+            </div>
+            <div class="feat-subject-grid">
+              <div class="feat-subj-pill"><span>📖</span><p>Literacy</p></div>
+              <div class="feat-subj-pill"><span>🔢</span><p>Numeracy</p></div>
+              <div class="feat-subj-pill"><span>🌍</span><p>Science</p></div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- STATS BAND -->
-<div class="problem">
-  <div class="problem-inner">
-    <div class="stat-box reveal">
-      <div class="stat-n">32M+</div>
-      <div class="stat-l">People with hearing loss across Africa (WHO)</div>
+  <!-- Panel 2 -->
+  <div class="feat-panel" id="feat-sign-recognition">
+    <div class="feat-content">
+      <div class="feat-content-tag">AI Sign Recognition</div>
+      <h3>Practice your signs and get instant feedback.</h3>
+      <div class="feat-quote">
+        "The sign recognition is like having a teacher watching you practice at home. My daughter gets immediate feedback — she knows exactly what to correct."<br><br>
+        <strong>— Amaka, parent of 9-year-old deaf child, Abuja</strong>
+      </div>
+      <div class="feat-store-row">
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>Google Play</a>
+      </div>
+      <a href="#" class="feat-free-link">Get it free →</a>
     </div>
-    <div class="stat-box reveal reveal-delay-1">
-      <div class="stat-n">~20%</div>
-      <div class="stat-l">of deaf children in Nigeria complete primary school</div>
-    </div>
-    <div class="stat-box reveal reveal-delay-2">
-      <div class="stat-n">&lt;5%</div>
-      <div class="stat-l">of African edtech content is accessibility-compliant</div>
-    </div>
-    <div class="stat-box reveal reveal-delay-3">
-      <div class="stat-n">1 in 6</div>
-      <div class="stat-l">people globally will have hearing loss by 2050 (WHO)</div>
-    </div>
-  </div>
-</div>
-
-<!-- WHY -->
-<section class="sec why" id="why">
-  <div class="wrap">
-    <div class="kicker reveal">Why SkillBridge</div>
-    <h2 class="sec-h reveal">Built for the children<br><em>everyone else ignored.</em></h2>
-    <p class="sec-p reveal">Africa's edtech boom passed deaf children by. SkillBridge was built from scratch to change that.</p>
-    <div class="why-grid reveal">
-      <div class="why-card">
-        <div class="why-num">01</div>
-        <h3>Africa-First, Always</h3>
-        <p>Built for Nigerian Sign Language from day one — not a translation of a Western product. Real language, real curriculum, real relevance for African deaf children and families.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">02</div>
-        <h3>Works Without Internet</h3>
-        <p>Designed for Nigeria's connectivity reality. Download lessons over WiFi — then everything works offline. Video, AI practice, quizzes. No data, no problem.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">03</div>
-        <h3>AI That Watches and Teaches</h3>
-        <p>Our on-device AI evaluates sign language in real time using the phone camera — turning passive video watching into an active, responsive learning experience.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">04</div>
-        <h3>Teachers Stay in Control</h3>
-        <p>No sign language knowledge required. The teacher dashboard gives full visibility over every student — who is thriving, who needs help, and exactly what to do next.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">05</div>
-        <h3>Any Budget Phone</h3>
-        <p>Optimized for affordable Android devices. No tablets, no expensive hardware — just the phone that's already in a parent's pocket across Nigeria.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">06</div>
-        <h3>Curriculum-Aligned</h3>
-        <p>Lessons follow Nigeria's official primary school curriculum — literacy, numeracy, science, social studies — so every child learns what they need to succeed in school and life.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="sec how" id="how">
-  <div class="wrap">
-    <div class="kicker reveal">How It Works</div>
-    <h2 class="sec-h reveal">Simple for children.<br><em>Powerful for teachers.</em></h2>
-    <p class="sec-p reveal">A structured four-step learning journey that keeps deaf children progressing every single day.</p>
-    <div class="how-steps reveal">
-      <div class="how-step">
-        <div class="how-step-n">1</div>
-        <h3>Watch the Lesson</h3>
-        <p>Short 2–5 min NSL video lessons taught by trained deaf educators. Downloadable, offline-ready, curriculum-aligned.</p>
-        <span class="how-step-tag">📹 NSL Video</span>
-      </div>
-      <div class="how-step">
-        <div class="how-step-n">2</div>
-        <h3>Practice with AI</h3>
-        <p>Camera activates. Child signs back what they learned. On-device AI evaluates and gives instant feedback — no internet needed.</p>
-        <span class="how-step-tag">🤟 AI Recognition</span>
-      </div>
-      <div class="how-step">
-        <div class="how-step-n">3</div>
-        <h3>Take the Quiz</h3>
-        <p>End-of-module quizzes test real comprehension. Scores sync to the teacher dashboard automatically when back online.</p>
-        <span class="how-step-tag">📝 Assessments</span>
-      </div>
-      <div class="how-step">
-        <div class="how-step-n">4</div>
-        <h3>Teacher Guides</h3>
-        <p>Dashboard shows every student's progress. Teacher assigns next lessons, spots who's falling behind, takes action — all without knowing sign language.</p>
-        <span class="how-step-tag">👩‍🏫 Dashboard</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="wrap">
-    <div class="kicker reveal">Features</div>
-    <h2 class="sec-h reveal">Everything a deaf child needs<br><em>to succeed in school.</em></h2>
-    <p class="sec-p reveal">SkillBridge is a complete learning ecosystem, not just a video player.</p>
-    <div class="feat-grid reveal">
-      <div class="feat">
-        <div class="feat-icon">📹</div>
-        <h3>NSL Video Lessons</h3>
-        <p>Short, engaging lessons taught entirely in Nigerian Sign Language by trained deaf educators. Downloadable, offline-ready.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">🤟</div>
-        <h3>AI Sign Recognition</h3>
-        <p>MediaPipe + TensorFlow Lite runs fully on-device. Evaluates signs in real time, no internet needed. Works on budget Android.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">📊</div>
-        <h3>Progress Tracking</h3>
-        <p>Every lesson, quiz, and practice session logged. Students see their own growth. Teachers see the full class picture.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">📋</div>
-        <h3>Lesson Assignment</h3>
-        <p>Teachers push specific lessons to individual students or the whole class. Appears instantly in the student's app.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">🚦</div>
-        <h3>At-Risk Alerts</h3>
-        <p>Traffic light system flags students falling behind in real time — so no child slips through the cracks unnoticed.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">👨‍👩‍👧</div>
-        <h3>Parent NSL Course</h3>
-        <p>90% of deaf children have hearing parents. Our parent module teaches basic NSL so families can communicate and support learning at home.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTENT -->
-<section class="sec content-sec" id="content">
-  <div class="wrap">
-    <div class="kicker reveal">Content</div>
-    <h2 class="sec-h reveal">Rich curriculum.<br><em>NSL-native. Always.</em></h2>
-    <div class="content-split">
-      <div class="subjects reveal">
-        <div class="subj">
-          <div class="subj-icon">📖</div>
-          <div class="subj-info"><h4>Literacy</h4><p>Reading, writing, comprehension</p></div>
-          <div class="subj-badge">P1–P6</div>
-        </div>
-        <div class="subj">
-          <div class="subj-icon">🔢</div>
-          <div class="subj-info"><h4>Numeracy</h4><p>Numbers, operations, problem solving</p></div>
-          <div class="subj-badge">P1–P6</div>
-        </div>
-        <div class="subj">
-          <div class="subj-icon">🔬</div>
-          <div class="subj-info"><h4>Basic Science</h4><p>Nature, environment, health</p></div>
-          <div class="subj-badge">P1–P6</div>
-        </div>
-        <div class="subj">
-          <div class="subj-icon">🌐</div>
-          <div class="subj-info"><h4>Social Studies</h4><p>Community, culture, civics</p></div>
-          <div class="subj-badge">P1–P6</div>
-        </div>
-      </div>
-      <div class="content-copy reveal reveal-delay-1">
-        <h3>Built from scratch in Nigerian Sign Language — not translated.</h3>
-        <p>Every piece of content is developed with trained deaf educators and aligned to Nigeria's official primary school curriculum. We don't adapt hearing content — we build from zero in NSL.</p>
-        <p>Lessons are 2–5 minutes, structured around one concept, designed for children aged 4–14. Every module ends with a quiz that tests real comprehension.</p>
-        <div class="tags">
-          <span class="tag">2–5 min lessons</span>
-          <span class="tag">NSL-native</span>
-          <span class="tag">Deaf educators</span>
-          <span class="tag">P1 to P6</span>
-          <span class="tag">Offline downloads</span>
-          <span class="tag">Quiz per module</span>
+    <div class="feat-visual">
+      <div class="feat-phone-wrap">
+        <div class="feat-phone-screen">
+          <div class="feat-phone-header"><span>Sign Practice</span><span>Camera On</span></div>
+          <div class="feat-phone-body">
+            <div style="background:#0A1628;border-radius:14px;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+              <div style="width:50px;height:50px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><polygon points="16 3 8 3 7 7 17 7"/></svg>
+              </div>
+              <p style="font-size:9px;font-weight:800;color:rgba(255,255,255,0.7);font-family:Nunito">Camera Active</p>
+            </div>
+            <div style="background:#E8F8F1;border-radius:12px;padding:10px;text-align:center">
+              <p style="font-size:8px;font-weight:800;color:#718096;margin-bottom:4px">ACCURACY SCORE</p>
+              <p style="font-size:28px;font-weight:900;color:#1CB87A;line-height:1">96%</p>
+              <p style="font-size:8px;color:#075C3B;font-weight:700">✓ Excellent hand positioning!</p>
+            </div>
+            <div class="feat-subject-grid">
+              <div class="feat-subj-pill"><span>🤟</span><p>A-Z Signs</p></div>
+              <div class="feat-subj-pill"><span>🔢</span><p>Numbers</p></div>
+              <div class="feat-subj-pill"><span>💬</span><p>Phrases</p></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Panels 3-6 (simplified) -->
+  <div class="feat-panel" id="feat-adaptive">
+    <div class="feat-content">
+      <div class="feat-content-tag">Adaptive Learning Engine</div>
+      <h3>Every child learns at their own perfect pace.</h3>
+      <div class="feat-quote">
+        "Idarilearn adjusts to each learner automatically. Children who are struggling get easier content; those who are excelling get challenged — all without teacher intervention."<br><br>
+        <strong>— Olumide T., Teacher, School for the Deaf, Abuja</strong>
+      </div>
+      <div class="feat-store-row">
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>Google Play</a>
+      </div>
+      <a href="#" class="feat-free-link">Get it free →</a>
+    </div>
+    <div class="feat-visual">
+      <div class="feat-phone-wrap">
+        <div class="feat-phone-screen">
+          <div class="feat-phone-header"><span>My Learning Path</span><span>Adaptive</span></div>
+          <div class="feat-phone-body">
+            <div style="background:var(--off);border-radius:12px;padding:10px">
+              <p style="font-size:8px;font-weight:800;color:#718096;margin-bottom:8px">YOUR WEEKLY PROGRESS</p>
+              <div style="display:flex;align-items:flex-end;gap:6px;height:60px">
+                <div style="flex:1;background:#E8F8F1;border-radius:4px 4px 0 0;height:40%"></div>
+                <div style="flex:1;background:#1CB87A;border-radius:4px 4px 0 0;height:65%"></div>
+                <div style="flex:1;background:#1CB87A;border-radius:4px 4px 0 0;height:90%"></div>
+                <div style="flex:1;background:#1CB87A;border-radius:4px 4px 0 0;height:100%"></div>
+                <div style="flex:1;background:#FFB800;border-radius:4px 4px 0 0;height:75%"></div>
+              </div>
+            </div>
+            <div style="background:#E8F8F1;border-radius:12px;padding:10px;text-align:center">
+              <p style="font-size:20px;margin-bottom:4px">🚀</p>
+              <p style="font-size:9px;font-weight:800;color:#075C3B">Level Up Unlocked!</p>
+              <p style="font-size:8px;color:#718096">Ready for Grade 3 content</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feat-panel" id="feat-progress">
+    <div class="feat-content">
+      <div class="feat-content-tag">Learning Reports</div>
+      <h3>Know exactly how every child is progressing.</h3>
+      <div class="feat-quote">
+        "Parents and teachers can see exactly what a child has learned, where they struggle, and what to focus on next — in real time, without any extra work."<br><br>
+        <strong>— Idarilearn Teacher Dashboard</strong>
+      </div>
+      <a href="#" class="feat-free-link">Get it free →</a>
+    </div>
+    <div class="feat-visual">
+      <div class="why-img-wrap"><div class="why-img-inner"><span class="why-emoji">📊</span><div class="why-img-label">Live progress tracking</div><div class="why-img-sub">Real-time for teachers &amp; parents</div></div></div>
+    </div>
+  </div>
+  <div class="feat-panel" id="feat-offline">
+    <div class="feat-content">
+      <div class="feat-content-tag">Offline-First</div>
+      <h3>Works anywhere — even without internet.</h3>
+      <div class="feat-quote">
+        "In communities where data is expensive, learning cannot be gated behind a wifi connection. Idarilearn downloads and works fully offline."<br><br>
+        <strong>— Idarilearn Engineering Team</strong>
+      </div>
+      <a href="#" class="feat-free-link">Get it free →</a>
+    </div>
+    <div class="feat-visual">
+      <div class="why-img-wrap"><div class="why-img-inner"><span class="why-emoji">📡</span><div class="why-img-label">Offline-first design</div><div class="why-img-sub">Works in rural Nigeria &amp; beyond</div></div></div>
+    </div>
+  </div>
+  <div class="feat-panel" id="feat-parents">
+    <div class="feat-content">
+      <div class="feat-content-tag">Parent Mode</div>
+      <h3>Parents learn NSL alongside their child.</h3>
+      <div class="feat-quote">
+        "Over 90% of parents cannot support their deaf child's learning at home — because they don't know sign language. Idarilearn teaches both, together."<br><br>
+        <strong>— From 300+ community interviews, Nigeria 2024</strong>
+      </div>
+      <a href="#" class="feat-free-link">Get it free →</a>
+    </div>
+    <div class="feat-visual">
+      <div class="why-img-wrap"><div class="why-img-inner"><span class="why-emoji">👨‍👩‍👧</span><div class="why-img-label">Family learning mode</div><div class="why-img-sub">No prior NSL knowledge needed</div></div></div>
+    </div>
+  </div>
 </section>
 
-<!-- COUNTRIES -->
-<section class="sec countries" id="countries">
-  <div class="wrap">
-    <div class="kicker reveal">Countries</div>
-    <h2 class="sec-h reveal">Nigeria first.<br><em>Pan-African always.</em></h2>
-    <p class="sec-p reveal">We launch with NSL and expand across the continent, adapting content to each country's sign language.</p>
-    <div class="c-grid reveal">
-      <div class="c-card">
-        <div class="c-flag">🇳🇬</div>
-        <div class="c-name">Nigeria</div>
-        <div class="c-lang">Nigerian Sign Language</div>
-        <span class="badge live">Live</span>
+<!-- WHY IT WORKS -->
+<section class="why-section" id="why">
+  <h2>Why Idarilearn works</h2>
+  <div class="why-tabs">
+    <button class="why-tab active" onclick="switchWhy('learners',this)">For learners</button>
+    <button class="why-tab" onclick="switchWhy('parents',this)">For parents</button>
+    <button class="why-tab" onclick="switchWhy('teachers',this)">For teachers</button>
+    <button class="why-tab" onclick="switchWhy('schools',this)">For schools</button>
+  </div>
+
+  <div class="why-panel active" id="why-learners">
+    <div>
+      <ul>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Master literacy, numeracy and core subjects in Nigerian Sign Language.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Real-time sign recognition gives you instant feedback — like a personal tutor.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Start from zero — Idarilearn teaches sign language from scratch.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Track your progress, earn levels, and celebrate every achievement.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Learn at your own pace — the AI adjusts content just for you.</li>
+      </ul>
+      <div class="feat-store-row">
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>Google Play</a>
       </div>
-      <div class="c-card">
-        <div class="c-flag">🇬🇭</div>
-        <div class="c-name">Ghana</div>
-        <div class="c-lang">Ghana Sign Language</div>
-        <span class="badge soon">Year 2</span>
+    </div>
+    <div class="why-img-wrap"><div class="why-img-inner"><span class="why-emoji">🤟</span><div class="why-img-label">Learning in their language</div><div class="why-img-sub">Deaf children aged 6–25 across Nigeria</div></div></div>
+  </div>
+
+  <div class="why-panel" id="why-parents">
+    <div>
+      <ul>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>No prior NSL knowledge needed — Idarilearn teaches you and your child simultaneously.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Track your child's progress and understand exactly where to support them.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Reduce dependence on overstretched teachers — learning continues at home.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Build a shared language with your child, strengthening your family bond.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Secure your child's future with accessible, curriculum-aligned education.</li>
+      </ul>
+      <div class="feat-store-row">
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>Google Play</a>
       </div>
-      <div class="c-card">
-        <div class="c-flag">🇰🇪</div>
-        <div class="c-name">Kenya</div>
-        <div class="c-lang">Kenya Sign Language</div>
-        <span class="badge soon">Year 2</span>
+    </div>
+    <div class="why-img-wrap"><div class="why-img-inner"><span class="why-emoji">👨‍👩‍👧</span><div class="why-img-label">Families learning together</div><div class="why-img-sub">Over 90% of parents need support — we provide it</div></div></div>
+  </div>
+
+  <div class="why-panel" id="why-teachers">
+    <div>
+      <ul>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Pre-built NSL lesson videos free you from repetitive instruction time.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Track every student's progress in real time — spot who needs help instantly.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Structured at-home practice reinforces your classroom teaching automatically.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Designed directly with teachers at Nigerian deaf schools.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Save hours weekly — automatic progress data replaces manual assessment.</li>
+      </ul>
+      <div class="feat-store-row">
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>Google Play</a>
       </div>
-      <div class="c-card">
-        <div class="c-flag">🇿🇦</div>
-        <div class="c-name">South Africa</div>
-        <div class="c-lang">South African SL</div>
-        <span class="badge planned">Year 3</span>
+    </div>
+    <div class="why-img-wrap"><div class="why-img-inner"><span class="why-emoji">🏫</span><div class="why-img-label">Tools that empower teachers</div><div class="why-img-sub">5 schools already waiting to pilot</div></div></div>
+  </div>
+
+  <div class="why-panel" id="why-schools">
+    <div>
+      <ul>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Open-source and completely free — no licensing costs for schools or NGOs.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Adaptable codebase — localise for your sign language and curriculum.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Designed for low-cost Android — works across low-resource environments.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Pan-African roadmap — expanding to Ghana and Kenya within 12 months.</li>
+        <li><div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Monitor school-wide learner outcomes and teacher performance in real time.</li>
+      </ul>
+      <div class="feat-store-row">
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>App Store</a>
+        <a href="#" class="btn-store-sm"><svg viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.34.19.73.21 1.1.08L15.34 12 4.28.16C3.91.03 3.52.05 3.18.24 2.5.62 2.06 1.33 2.06 2.13v19.74c0 .8.44 1.51 1.12 1.89zM21.4 9.65l-2.53-1.43-3.01 2.78 3.01 2.78 2.54-1.44c.73-.41 1.17-1.14 1.17-1.85 0-.7-.44-1.43-1.18-1.84zM5.49 22.34l10.77-10.34-2.98-2.76L5.49 22.34zM5.49 1.66l7.79 13.1-2.98-2.76L5.49 1.66z"/></svg>Google Play</a>
       </div>
-      <div class="c-card">
-        <div class="c-flag">🇷🇼</div>
-        <div class="c-name">Rwanda</div>
-        <div class="c-lang">Rwandan Sign Language</div>
-        <span class="badge planned">Year 3</span>
+    </div>
+    <div class="why-img-wrap"><div class="why-img-inner"><span class="why-emoji">🌍</span><div class="why-img-label">Built to scale across Africa</div><div class="why-img-sub">Open-source — free for any organisation</div></div></div>
+  </div>
+</section>
+
+<!-- EXPLORE CONTENT -->
+<section class="explore-section">
+  <h2>Explore Idarilearn content</h2>
+  <div class="explore-tabs">
+    <button class="explore-tab active">Trending</button>
+    <button class="explore-tab">Just added</button>
+  </div>
+  <div class="explore-cards">
+    <div class="explore-card">
+      <div class="explore-card-thumb green">📖</div>
+      <div class="explore-card-info">
+        <div class="explore-card-subj">Literacy</div>
+        <div class="explore-card-title">Alphabet A–Z in Nigerian Sign Language</div>
+        <div class="explore-card-level">Grade 1 · Beginner</div>
       </div>
-      <div class="c-card">
-        <div class="c-flag">🇹🇿</div>
-        <div class="c-name">Tanzania</div>
-        <div class="c-lang">Tanzanian Sign Language</div>
-        <span class="badge planned">Year 3</span>
+    </div>
+    <div class="explore-card">
+      <div class="explore-card-thumb yellow">🔢</div>
+      <div class="explore-card-info">
+        <div class="explore-card-subj">Numeracy</div>
+        <div class="explore-card-title">Counting 1–100 with Hand Signs</div>
+        <div class="explore-card-level">Grade 2 · Beginner</div>
+      </div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-card-thumb blue">🌍</div>
+      <div class="explore-card-info">
+        <div class="explore-card-subj">Science</div>
+        <div class="explore-card-title">Parts of the Human Body in NSL</div>
+        <div class="explore-card-level">Grade 3 · Intermediate</div>
+      </div>
+    </div>
+    <div class="explore-card">
+      <div class="explore-card-thumb pink">💬</div>
+      <div class="explore-card-info">
+        <div class="explore-card-subj">Communication</div>
+        <div class="explore-card-title">Everyday Greetings & Phrases in NSL</div>
+        <div class="explore-card-level">All levels · Essential</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PARTNERS -->
-<section class="partners" id="partners">
-  <div class="partners-inner">
-    <div class="kicker reveal">Partners & Supporters</div>
-    <h2 class="sec-h reveal">Backed by organisations<br><em>that care about equity.</em></h2>
-    <div class="p-row reveal">
-      <div class="p-chip">CcHUB × Mastercard Foundation</div>
-      <div class="p-chip">UNICEF Nigeria</div>
-      <div class="p-chip">Nigerian Assoc. of the Deaf</div>
-      <div class="p-chip">UBEC</div>
-      <div class="p-chip">CBM Global</div>
-      <div class="p-chip">Schools for the Deaf, Lagos</div>
-      <div class="p-chip">IDICE StartupBridge</div>
+<!-- STATS STRIP -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-item-num"><span id="c1">4,000,000</span><span style="color:var(--green)">+</span></div>
+      <div class="stat-item-label">Deaf people in Nigeria who need this solution</div>
+    </div>
+    <div>
+      <div class="stat-item-num"><span id="c2">300</span><span style="color:var(--green)">+</span></div>
+      <div class="stat-item-label">Community interviews completed across Nigeria</div>
+    </div>
+    <div>
+      <div class="stat-item-num"><span id="c3">5</span></div>
+      <div class="stat-item-label">Deaf schools ready to pilot Idarilearn at launch</div>
+    </div>
+    <div>
+      <div class="stat-item-num"><span id="c4">1,500</span><span style="color:var(--green)">+</span></div>
+      <div class="stat-item-label">Target active learners within 12 months across Africa</div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi" id="testimonials">
-  <div class="wrap">
-    <div class="kicker reveal">Testimonials</div>
-    <h2 class="sec-h reveal">What people are saying.</h2>
-    <p class="sec-p reveal">Early voices from teachers, parents, and Nigeria's deaf community.</p>
-    <div class="t-grid reveal">
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-q">"For the first time, my daughter came home excited about school. She showed me how to sign 'hello' and 'I love you'. SkillBridge gave her something to be proud of."</p>
-        <div class="t-auth">
-          <div class="t-av">FA</div>
-          <div><div class="t-name">Fatima A.</div><div class="t-role">Parent, Lagos</div></div>
-        </div>
-      </div>
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-q">"I have taught at a school for the deaf for 11 years. Nothing has ever let me see exactly which students need help and act on it the same day. This changes everything."</p>
-        <div class="t-auth">
-          <div class="t-av">MO</div>
-          <div><div class="t-name">Mr. Okafor M.</div><div class="t-role">Teacher, School for the Deaf, Enugu</div></div>
-        </div>
-      </div>
-      <div class="t-empty">
-        <span>💬</span>
-        <p>More stories coming soon as we grow our community of deaf learners, teachers, and parents across Nigeria.</p>
-      </div>
-    </div>
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div>
+    <h2>Join 500+ learners already using Idarilearn to succeed</h2>
+    <p>Over 90% of deaf learners in our pilot showed improved engagement in just 2 weeks of consistent use.</p>
+  </div>
+  <div class="cta-banner-actions">
+    <a href="#" class="btn-white-solid">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Free
+    </a>
+    <a href="https://wa.me/2348000000000" class="btn-whatsapp">
+      💬 Join our community
+    </a>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="wrap">
-    <div class="kicker reveal">FAQ</div>
-    <h2 class="sec-h reveal">Questions answered.</h2>
-    <div class="faq-wrap">
-      <div class="faq-item reveal">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span>Who is SkillBridge designed for?</span>
-          <div class="faq-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </button>
-        <div class="faq-ans"><p>SkillBridge is designed for deaf and hard-of-hearing children aged 4–14 in Nigeria, along with their teachers and hearing parents who want to actively support their child's education.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span>Do I need internet to use SkillBridge?</span>
-          <div class="faq-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </button>
-        <div class="faq-ans"><p>No. SkillBridge is built offline-first. Download lessons over WiFi and the full learning experience — videos, AI practice, quizzes — works completely offline. Progress syncs automatically when you reconnect.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span>What phone do I need?</span>
-          <div class="faq-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </button>
-        <div class="faq-ans"><p>Any Android smartphone with a front-facing camera. We have optimised SkillBridge for budget Android devices — no expensive hardware required. iOS support is coming soon.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span>Does the teacher need to know sign language?</span>
-          <div class="faq-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </button>
-        <div class="faq-ans"><p>No. The teacher dashboard is designed for hearing teachers. It shows progress, flags who needs attention, and lets teachers assign lessons — all without any sign language knowledge.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span>How much does SkillBridge cost?</span>
-          <div class="faq-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </button>
-        <div class="faq-ans"><p>Free tier includes the first module of each subject. Full curriculum access starts at ₦2,500/month or ₦18,000/year. Schools access institutional licensing from ₦150,000/year.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span>Will SkillBridge expand beyond Nigeria?</span>
-          <div class="faq-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </button>
-        <div class="faq-ans"><p>Yes. Ghana and Kenya are planned for Year 2 in their respective sign languages. South Africa, Rwanda, and Tanzania follow in Year 3. Each country gets content built natively in their sign language.</p></div>
-      </div>
+<section class="faq-section" id="faq">
+  <h2>FAQs</h2>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-question">What is Idarilearn?<div class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    <div class="faq-answer">Idarilearn is an AI-powered mobile learning platform that delivers curriculum-aligned education to deaf children and young people aged 6–25 in Nigeria and across sub-Saharan Africa, using Nigerian Sign Language, real-time sign recognition, and adaptive learning technology.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-question">How much does Idarilearn cost?<div class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    <div class="faq-answer">Idarilearn is completely free to use. It is built as an open-source solution, making it freely adaptable by schools, NGOs, and governments across Africa. We believe no child should be excluded from learning because of cost.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-question">Do I need to know sign language to use it?<div class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    <div class="faq-answer">No prior sign language knowledge is required — from children or parents. Idarilearn teaches both simultaneously, from the very first sign. This was one of our most important design decisions, based on feedback from over 300 community interviews.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-question">Does it work without internet?<div class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    <div class="faq-answer">Yes. Idarilearn is designed for low-bandwidth environments and works fully offline once content is downloaded. This is critical for learners in rural communities where data costs are high and connectivity is unreliable.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-question">What phones does Idarilearn work on?<div class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+    <div class="faq-answer">Idarilearn is designed specifically for low-cost Android smartphones, ensuring it can reach families who cannot afford premium devices. An iOS version is also planned for later in 2025.</div>
+  </div>
+  <div class="faq-footer">Got more questions? <a href="mailto:hello@idarilearn.com">Contact us</a></div>
+</section>
+
+<!-- IN THE NEWS -->
+<section class="news-section">
+  <h2>Idarilearn in the news</h2>
+  <div class="news-logos">
+    <div class="news-logo-box">TechCabal</div>
+    <div class="news-logo-box">BusinessDay</div>
+    <div class="news-logo-box">The Guardian NG</div>
+    <div class="news-logo-box">Punch</div>
+    <div class="news-logo-box">VentureBurn</div>
+    <div class="news-logo-box">The Nation</div>
+    <div class="news-logo-box">ThisDay</div>
+  </div>
+</section>
+
+<!-- COUNTRIES MARQUEE -->
+<section class="countries-section">
+  <h2>Always near you</h2>
+  <div style="overflow:hidden">
+    <div class="marquee-track">
+      <div class="country-chip"><span class="country-flag">🇳🇬</span>Nigeria</div>
+      <div class="country-chip"><span class="country-flag">🇬🇭</span>Ghana</div>
+      <div class="country-chip"><span class="country-flag">🇰🇪</span>Kenya</div>
+      <div class="country-chip"><span class="country-flag">🇿🇦</span>South Africa</div>
+      <div class="country-chip"><span class="country-flag">🇹🇿</span>Tanzania</div>
+      <div class="country-chip"><span class="country-flag">🇺🇬</span>Uganda</div>
+      <div class="country-chip"><span class="country-flag">🇷🇼</span>Rwanda</div>
+      <div class="country-chip"><span class="country-flag">🇸🇳</span>Senegal</div>
+      <div class="country-chip"><span class="country-flag">🇨🇮</span>Ivory Coast</div>
+      <div class="country-chip"><span class="country-flag">🇱🇷</span>Liberia</div>
+      <div class="country-chip"><span class="country-flag">🇸🇱</span>Sierra Leone</div>
+      <div class="country-chip"><span class="country-flag">🇹🇬</span>Togo</div>
+      <!-- Duplicate for seamless loop -->
+      <div class="country-chip"><span class="country-flag">🇳🇬</span>Nigeria</div>
+      <div class="country-chip"><span class="country-flag">🇬🇭</span>Ghana</div>
+      <div class="country-chip"><span class="country-flag">🇰🇪</span>Kenya</div>
+      <div class="country-chip"><span class="country-flag">🇿🇦</span>South Africa</div>
+      <div class="country-chip"><span class="country-flag">🇹🇿</span>Tanzania</div>
+      <div class="country-chip"><span class="country-flag">🇺🇬</span>Uganda</div>
+      <div class="country-chip"><span class="country-flag">🇷🇼</span>Rwanda</div>
+      <div class="country-chip"><span class="country-flag">🇸🇳</span>Senegal</div>
+      <div class="country-chip"><span class="country-flag">🇨🇮</span>Ivory Coast</div>
+      <div class="country-chip"><span class="country-flag">🇱🇷</span>Liberia</div>
+      <div class="country-chip"><span class="country-flag">🇸🇱</span>Sierra Leone</div>
+      <div class="country-chip"><span class="country-flag">🇹🇬</span>Togo</div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-sec">
-  <div class="cta-inner">
-    <h2 class="cta-h">Ready to give your child<br>the education they deserve?</h2>
-    <p class="cta-sub">Download SkillBridge today. Learning in their language. Starting now.</p>
-    <div class="cta-btns">
-      <a href="#" class="cta-btn-dark">🍎 &nbsp;Download on App Store</a>
-      <a href="#" class="cta-btn-w">▶ &nbsp;Get it on Google Play</a>
-    </div>
+<!-- KEY SUPPORTERS -->
+<section class="supporters-section">
+  <h2>Key supporters</h2>
+  <div class="supporters-grid">
+    <div class="supporter-logo">UNICEF Venture Fund</div>
+    <div class="supporter-logo">African Union</div>
+    <div class="supporter-logo">DEAF Nigeria</div>
+    <div class="supporter-logo">Microsoft</div>
+    <div class="supporter-logo">UK-Nigeria Tech Hub</div>
+    <div class="supporter-logo">Fate Foundation</div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
+  <div class="footer-grid">
     <div class="footer-brand">
-      <div class="logo-text">Skill<span>Bridge</span></div>
-      <p>Learning in your language. Built in Lagos, Nigeria 🇳🇬</p>
+      <a href="#" class="footer-brand-logo logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9l-3 3 3 3M17 9l3 3-3 3M14 5l-4 14"/></svg>
+        </div>
+        <span class="logo-name">Idari<span>learn</span></span>
+      </a>
+      <p>AI-powered sign language learning for deaf children across Africa. Free, open-source, and built with the deaf community at its heart.</p>
+      <div class="footer-contact">
+        <p>Lagos, Nigeria</p>
+        <p><a href="mailto:hello@idarilearn.com">hello@idarilearn.com</a></p>
+        <p><a href="tel:+2348000000000">(+234) 800 000 0000</a></p>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="#why">Why Us</a>
-      <a href="#how">How It Works</a>
-      <a href="#features">Features</a>
-      <a href="#countries">Countries</a>
-      <a href="#faq">FAQ</a>
-      <a href="#">Privacy</a>
-      <a href="#">Contact</a>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Our Mission</a></li>
+        <li><a href="#">Impact Evidence</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Apps</h5>
+      <ul>
+        <li><a href="#">Idarilearn App</a></li>
+        <li><a href="#">Download for Android</a></li>
+        <li><a href="#">Download for iOS</a></li>
+        <li><a href="#">Open Source (GitHub)</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Community Guidelines</a></li>
+        <li><a href="#">Partner with us</a></li>
+      </ul>
     </div>
   </div>
-  <div class="footer-copy">© 2026 SkillBridge. All rights reserved.</div>
+  <div class="footer-bottom">
+    <p>© 2025 Idarilearn. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy policy</a>
+      <a href="#">Terms of service</a>
+    </div>
+  </div>
 </footer>
 
+<!-- POPUP (matches Afrilearn's excited woman popup) -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-card">
+    <button class="popup-close" onclick="document.getElementById('popup').classList.remove('show')">✕</button>
+    <div class="popup-face">🤟</div>
+    <h3>Want to bring Idarilearn to your school?</h3>
+    <p>Join 5 schools already partnering with us. Get our free setup guide and be first when we launch.</p>
+    <div class="popup-input-row">
+      <input type="email" class="popup-input" placeholder="Your email address">
+      <button class="popup-submit">Get the guide</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // Nav scroll
-  var nav = document.getElementById('nav');
-  window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 40);
+// Nav mode toggle
+function setMode(m){
+  document.querySelectorAll('.nav-mode-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// Feature tabs
+function switchFeat(id,btn){
+  document.querySelectorAll('.feat-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.feat-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('feat-'+id).classList.add('active');
+}
+
+// Why tabs
+function switchWhy(id,btn){
+  document.querySelectorAll('.why-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.why-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('why-'+id).classList.add('active');
+}
+
+// FAQ accordion
+function toggleFaq(el){
+  const isOpen=el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
+}
+
+// Explore tabs (visual only)
+document.querySelectorAll('.explore-tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.explore-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
   });
+});
 
-  // Mobile menu
-  function toggleMenu(){document.getElementById('mMenu').classList.toggle('open')}
-  function closeMenu(){document.getElementById('mMenu').classList.remove('open')}
+// Popup after 8s
+setTimeout(()=>document.getElementById('popup').classList.add('show'), 8000);
 
-  // FAQ
-  function toggleFaq(btn){
-    var item = btn.closest('.faq-item');
-    var open = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(function(el){el.classList.remove('open')});
-    if(!open) item.classList.add('open');
+// Animated counters
+function animateCounter(el,target,duration){
+  const start=Date.now();
+  const step=()=>{
+    const p=Math.min((Date.now()-start)/duration,1);
+    const val=Math.floor(p*target);
+    el.textContent=val.toLocaleString();
+    if(p<1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const statsObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    animateCounter(document.getElementById('c1'),4000000,2000);
+    animateCounter(document.getElementById('c2'),300,1500);
+    animateCounter(document.getElementById('c3'),5,800);
+    animateCounter(document.getElementById('c4'),1500,1800);
+    statsObs.disconnect();
   }
-
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click',function(e){
-      var t = document.querySelector(this.getAttribute('href'));
-      if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});}
-    });
-  });
-
-  // Scroll reveal
-  var ro = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');}});
-  },{threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el)});
+},{threshold:.5});
+statsObs.observe(document.querySelector('.stats-section'));
 </script>
 </body>
 </html>
